@@ -33,14 +33,14 @@ export default function Settings() {
     return arr.includes(item) ? arr.filter((v) => v !== item) : [...arr, item];
   };
 
-  const inputClass = "w-full border border-border rounded-md px-3 py-2 bg-card text-foreground text-sm";
-  const labelClass = "block text-sm font-medium text-foreground mb-1";
+  const inputClass = "w-full border border-border rounded-md px-3 py-2.5 bg-card text-foreground text-sm";
+  const labelClass = "block text-sm font-semibold text-foreground mb-2";
 
   return (
     <div className="max-w-xl mx-auto">
       <h1 className="heading-section mb-8">Preferences</h1>
 
-      <div className="premium-card space-y-6">
+      <div className="premium-card space-y-7">
         <div>
           <label className={labelClass}>Role Keywords</label>
           <input
@@ -59,12 +59,12 @@ export default function Settings() {
             {LOCATIONS.map((loc) => (
               <button
                 key={loc}
+                type="button"
                 onClick={() => setForm((f) => ({ ...f, preferredLocations: toggleArrayItem(f.preferredLocations, loc) }))}
-                className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${
-                  form.preferredLocations.includes(loc)
-                    ? "bg-primary text-primary-foreground border-primary"
+                className={`text-xs font-medium px-3.5 py-2 rounded-full border ${form.preferredLocations.includes(loc)
+                    ? "bg-primary text-primary-foreground border-primary hover:opacity-90"
                     : "bg-secondary text-secondary-foreground border-border hover:bg-muted"
-                }`}
+                  }`}
               >
                 {loc}
               </button>
@@ -74,14 +74,14 @@ export default function Settings() {
 
         <div>
           <label className={labelClass}>Preferred Mode</label>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-4">
             {MODES.map((m) => (
-              <label key={m} className="flex items-center gap-2 text-sm cursor-pointer">
+              <label key={m} className="flex items-center gap-2.5 text-sm font-medium cursor-pointer select-none">
                 <input
                   type="checkbox"
                   checked={form.preferredMode.includes(m)}
                   onChange={() => setForm((f) => ({ ...f, preferredMode: toggleArrayItem(f.preferredMode, m) }))}
-                  className="rounded border-border"
+                  className="rounded border-border accent-primary w-4 h-4"
                 />
                 {m}
               </label>

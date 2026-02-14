@@ -85,17 +85,17 @@ export default function DigestPage() {
             <p className="text-sm text-muted-foreground mt-1">{digest.date}</p>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-3.5">
             {digest.entries.map((entry, i) => (
-              <div key={entry.job.id} className="flex items-start gap-3 p-3 rounded-md bg-background border border-border">
-                <span className="text-xs font-bold text-muted-foreground mt-1 w-5 shrink-0">{i + 1}</span>
+              <div key={entry.job.id} className="flex items-start gap-3.5 p-4 rounded-md bg-background border border-border hover:border-primary/30 transition-colors">
+                <span className="text-xs font-bold text-muted-foreground mt-0.5 w-6 shrink-0 text-center">{i + 1}</span>
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-serif text-sm font-semibold text-foreground">{entry.job.title}</h3>
-                  <p className="text-xs text-muted-foreground">{entry.job.company} — {entry.job.location}</p>
-                  <p className="text-xs text-muted-foreground">{entry.job.experience}</p>
+                  <h3 className="font-serif text-base font-semibold text-foreground mb-1">{entry.job.title}</h3>
+                  <p className="text-sm text-muted-foreground">{entry.job.company} • {entry.job.location}</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">{entry.job.experience}</p>
                 </div>
-                <div className="flex items-center gap-2 shrink-0">
-                  <span className={`text-xs font-semibold px-2 py-0.5 rounded-full border ${getScoreClass(entry.matchScore)}`}>
+                <div className="flex items-center gap-2.5 shrink-0">
+                  <span className={`text-xs font-semibold px-2.5 py-1 rounded-full border ${getScoreClass(entry.matchScore)}`}>
                     {entry.matchScore}%
                   </span>
                   <a
@@ -103,27 +103,28 @@ export default function DigestPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-primary hover:opacity-80"
+                    aria-label="Apply"
                   >
-                    <ExternalLink className="w-3.5 h-3.5" />
+                    <ExternalLink className="w-4 h-4" />
                   </a>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="mt-6 pt-4 border-t border-border">
-            <p className="text-xs text-muted-foreground text-center mb-4">
+          <div className="mt-6 pt-5 border-t border-border">
+            <p className="text-xs text-muted-foreground text-center mb-5">
               This digest was generated based on your preferences.
             </p>
             <div className="flex gap-3 justify-center">
-              <button onClick={copyDigest} className="flex items-center gap-1.5 text-sm px-4 py-2 rounded-md bg-secondary text-secondary-foreground hover:bg-muted transition-colors">
-                <Copy className="w-3.5 h-3.5" /> Copy Digest
+              <button onClick={copyDigest} className="flex items-center gap-2 text-sm px-4 py-2.5 rounded-md bg-secondary text-secondary-foreground hover:bg-muted font-medium">
+                <Copy className="w-4 h-4" /> Copy Digest
               </button>
-              <button onClick={emailDigest} className="flex items-center gap-1.5 text-sm px-4 py-2 rounded-md bg-secondary text-secondary-foreground hover:bg-muted transition-colors">
-                <Mail className="w-3.5 h-3.5" /> Email Draft
+              <button onClick={emailDigest} className="flex items-center gap-2 text-sm px-4 py-2.5 rounded-md bg-secondary text-secondary-foreground hover:bg-muted font-medium">
+                <Mail className="w-4 h-4" /> Email Draft
               </button>
             </div>
-            <p className="text-xs text-muted-foreground text-center mt-4">Demo Mode: Daily 9AM trigger simulated manually.</p>
+            <p className="text-xs text-muted-foreground text-center mt-5">Demo Mode: Daily 9AM trigger simulated manually.</p>
           </div>
         </div>
       )}
@@ -143,11 +144,10 @@ export default function DigestPage() {
                     <span className="text-xs text-muted-foreground">
                       {new Date(entry.date).toLocaleDateString()}
                     </span>
-                    <span className={`text-xs px-2 py-0.5 rounded-full ${
-                      entry.status === "Applied" ? "status-applied" :
+                    <span className={`text-xs px-2 py-0.5 rounded-full ${entry.status === "Applied" ? "status-applied" :
                       entry.status === "Rejected" ? "status-rejected" :
-                      entry.status === "Selected" ? "status-selected" : "status-not-applied"
-                    }`}>
+                        entry.status === "Selected" ? "status-selected" : "status-not-applied"
+                      }`}>
                       {entry.status}
                     </span>
                   </div>

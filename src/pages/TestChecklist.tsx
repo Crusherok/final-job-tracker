@@ -54,10 +54,10 @@ export default function TestChecklist() {
 
   return (
     <div className="max-w-xl mx-auto">
-      <h1 className="heading-section mb-2">Test Checklist</h1>
+      <h1 className="heading-section mb-8">Test Checklist</h1>
 
-      <div className="flex items-center justify-between mb-6">
-        <p className="text-sm text-muted-foreground">
+      <div className="premium-card mb-6 flex items-center justify-between">
+        <p className="text-lg font-semibold text-foreground">
           Tests Passed: <span className="font-semibold text-foreground">{passedCount} / {testItems.length}</span>
         </p>
         {passedCount < testItems.length && (
@@ -65,17 +65,18 @@ export default function TestChecklist() {
         )}
       </div>
 
-      <div className="premium-card space-y-1">
-        {testItems.map((item) => (
+      <div className="bg-card border border-border rounded-lg shadow-sm">
+        {testItems.map((item, index) => (
           <div
             key={item.id}
-            className="flex items-center gap-3 py-3 px-2 rounded-md hover:bg-secondary/50 transition-colors"
+            className={`flex items-center gap-3.5 py-4 px-4 hover:bg-secondary/30 transition-colors ${index !== testItems.length - 1 ? "border-b border-border" : ""
+              }`}
           >
             <input
               type="checkbox"
               checked={!!checked[item.id]}
               onChange={() => toggle(item.id)}
-              className="rounded border-border w-4 h-4 accent-primary shrink-0"
+              className="rounded border-gray-300 w-5 h-5 accent-primary shrink-0 cursor-pointer"
             />
             <span className={`text-sm flex-1 ${checked[item.id] ? "text-muted-foreground line-through" : "text-foreground"}`}>
               {item.label}
@@ -85,11 +86,12 @@ export default function TestChecklist() {
                 onMouseEnter={() => setHoverHint(item.id)}
                 onMouseLeave={() => setHoverHint(null)}
                 className="text-muted-foreground hover:text-foreground"
+                type="button"
               >
-                <Info className="w-3.5 h-3.5" />
+                <Info className="w-4 h-4" />
               </button>
               {hoverHint === item.id && (
-                <div className="absolute right-0 top-6 z-10 bg-card border border-border rounded-md p-2 text-xs text-muted-foreground w-48 shadow-md">
+                <div className="absolute right-0 top-7 z-10 bg-card border border-border rounded-md p-3 text-xs text-muted-foreground w-56 shadow-lg">
                   {item.hint}
                 </div>
               )}
@@ -98,11 +100,13 @@ export default function TestChecklist() {
         ))}
       </div>
 
-      <div className="mt-4 text-center">
-        <button onClick={reset} className="text-xs text-muted-foreground hover:text-foreground transition-colors">
-          Reset Test Status
-        </button>
-      </div>
+      {passedCount === testItems.length && (
+        <div className="premium-card mt-6 bg-green-50 border-green-200">
+          <p className="text-sm text-green-700 font-medium text-center">
+            ✓ All tests passed. Ship route is now unlocked.
+          </p>
+        </div>
+      )}
     </div>
   );
 }

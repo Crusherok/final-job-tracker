@@ -94,9 +94,9 @@ export default function Dashboard() {
       <h1 className="heading-section mb-6">Dashboard</h1>
 
       {!prefs && (
-        <div className="premium-card mb-6 border-l-4 border-l-primary">
-          <p className="text-sm text-muted-foreground">
-            <Link to="/settings" className="text-primary font-medium hover:underline">Set your preferences</Link> to activate intelligent matching.
+        <div className="premium-card mb-6 border-l-4 border-l-primary bg-primary/5">
+          <p className="text-sm text-foreground">
+            <Link to="/settings" className="text-primary font-semibold hover:underline">Set your preferences</Link> to activate intelligent matching.
           </p>
         </div>
       )}

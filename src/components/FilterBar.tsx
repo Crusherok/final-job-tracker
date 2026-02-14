@@ -22,17 +22,18 @@ interface FilterBarProps {
 }
 
 export default function FilterBar(props: FilterBarProps) {
-  const selectClass = "text-sm border border-border rounded-md px-2 py-1.5 bg-card text-foreground";
+  const selectClass = "text-sm border border-border rounded-md px-3 py-2 bg-card text-foreground";
+  const inputClass = "text-sm border border-border rounded-md px-3 py-2 bg-card text-foreground";
 
   return (
     <div className="premium-card mb-6">
-      <div className="flex flex-wrap gap-3 items-center">
+      <div className="flex flex-wrap gap-2.5 items-center justify-center">
         <input
           type="text"
           placeholder="Search title or company..."
           value={props.keyword}
           onChange={(e) => props.onKeywordChange(e.target.value)}
-          className="text-sm border border-border rounded-md px-3 py-1.5 bg-card text-foreground min-w-[200px] flex-1"
+          className={`${inputClass} min-w-[200px] max-w-[340px]`}
         />
 
         <select value={props.location} onChange={(e) => props.onLocationChange(e.target.value)} className={selectClass}>
@@ -67,14 +68,17 @@ export default function FilterBar(props: FilterBarProps) {
         </select>
 
         {props.hasPreferences && (
-          <label className="flex items-center gap-2 text-sm text-muted-foreground cursor-pointer">
-            <input
-              type="checkbox"
-              checked={props.showOnlyMatches}
-              onChange={(e) => props.onShowOnlyMatchesChange(e.target.checked)}
-              className="rounded border-border"
-            />
-            Only matches
+          <label className="flex items-center gap-2 cursor-pointer whitespace-nowrap px-3 py-2">
+            <div className="relative inline-block w-11 h-6">
+              <input
+                type="checkbox"
+                checked={props.showOnlyMatches}
+                onChange={(e) => props.onShowOnlyMatchesChange(e.target.checked)}
+                className="sr-only peer"
+              />
+              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+            </div>
+            <span className="text-sm font-medium text-foreground select-none">Only matches</span>
           </label>
         )}
       </div>

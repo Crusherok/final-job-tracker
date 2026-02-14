@@ -146,4 +146,24 @@
   .status-selected {
     @apply bg-green-100 text-green-700;
   }
+
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-in;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Ensure all buttons have smooth transitions */
+  button, a, select, input[type="checkbox"] {
+    @apply transition-all duration-200;
+  }
 }

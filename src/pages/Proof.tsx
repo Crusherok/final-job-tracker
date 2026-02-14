@@ -61,8 +61,8 @@ export default function Proof() {
   const shipStatus: "Not Started" | "In Progress" | "Shipped" = !allLinksProvided
     ? "Not Started"
     : canShip
-    ? "Shipped"
-    : "In Progress";
+      ? "Shipped"
+      : "In Progress";
 
   const handleSave = () => {
     const newErrors: Record<string, string> = {};
@@ -108,34 +108,34 @@ Core Features:
   return (
     <div className="max-w-xl mx-auto">
       <h1 className="heading-section mb-2">Proof & Submission</h1>
-      <p className="text-sm text-muted-foreground mb-8">Project 1 — Job Notification Tracker</p>
+      <p className="text-lg text-foreground font-medium mb-6">Project 1 — Job Notification Tracker</p>
 
       {/* Status Badge */}
       <div className="flex items-center gap-2 mb-6">
         {shipStatus === "Shipped" ? (
-          <span className="flex items-center gap-1.5 text-sm font-medium px-3 py-1 rounded-full badge-score-high">
-            <CheckCircle className="w-3.5 h-3.5" /> Shipped
+          <span className="flex items-center gap-1.5 text-sm font-medium px-3 py-1.5 rounded-full badge-score-high">
+            <CheckCircle className="w-4 h-4" /> Shipped
           </span>
         ) : shipStatus === "In Progress" ? (
-          <span className="flex items-center gap-1.5 text-sm font-medium px-3 py-1 rounded-full badge-score-medium">
-            <Clock className="w-3.5 h-3.5" /> In Progress
+          <span className="flex items-center gap-1.5 text-sm font-medium px-3 py-1.5 rounded-full badge-score-medium">
+            <Clock className="w-4 h-4" /> In Progress
           </span>
         ) : (
-          <span className="flex items-center gap-1.5 text-sm font-medium px-3 py-1 rounded-full badge-score-neutral">
-            <AlertCircle className="w-3.5 h-3.5" /> Not Started
+          <span className="flex items-center gap-1.5 text-sm font-medium px-3 py-1.5 rounded-full badge-score-neutral">
+            <AlertCircle className="w-4 h-4" /> Not Started
           </span>
         )}
       </div>
 
       {/* Step Completion */}
       <div className="premium-card mb-6">
-        <h2 className="font-serif text-lg font-semibold mb-4">Step Completion Summary</h2>
-        <div className="space-y-2">
+        <h2 className="font-serif text-lg font-semibold mb-5">Step Completion Summary</h2>
+        <div className="space-y-3">
           {steps.map((step, i) => (
-            <div key={i} className="flex items-center gap-2 text-sm">
-              <CheckCircle className="w-4 h-4 text-success shrink-0" />
-              <span className="text-foreground">Step {i + 1}: {step}</span>
-              <span className="text-xs text-muted-foreground ml-auto">Completed</span>
+            <div key={i} className="flex items-center gap-3 text-sm py-2 rounded-md hover:bg-secondary/50 px-2 -mx-2 transition-colors">
+              <CheckCircle className="w-4.5 h-4.5 text-success shrink-0" />
+              <span className="text-foreground flex-1">Step {i + 1}: {step}</span>
+              <span className="text-xs font-medium text-success">Completed</span>
             </div>
           ))}
         </div>
@@ -155,11 +155,11 @@ Core Features:
       </div>
 
       {/* Artifact Links */}
-      <div className="premium-card mb-6 space-y-4">
+      <div className="premium-card mb-6 space-y-5">
         <h2 className="font-serif text-lg font-semibold">Artifact Collection</h2>
 
         <div>
-          <label className="block text-sm font-medium mb-1">Lovable Project Link</label>
+          <label className="block text-sm font-semibold mb-2">Lovable Project Link</label>
           <input
             type="url"
             placeholder="https://lovable.dev/projects/..."
@@ -167,11 +167,11 @@ Core Features:
             onChange={(e) => setForm((f) => ({ ...f, lovableUrl: e.target.value }))}
             className={inputClass}
           />
-          {errors.lovableUrl && <p className="text-xs text-destructive mt-1">{errors.lovableUrl}</p>}
+          {errors.lovableUrl && <p className="text-xs text-destructive mt-1.5">{errors.lovableUrl}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">GitHub Repository Link</label>
+          <label className="block text-sm font-semibold mb-2">GitHub Repository Link</label>
           <input
             type="url"
             placeholder="https://github.com/..."
@@ -179,11 +179,11 @@ Core Features:
             onChange={(e) => setForm((f) => ({ ...f, githubUrl: e.target.value }))}
             className={inputClass}
           />
-          {errors.githubUrl && <p className="text-xs text-destructive mt-1">{errors.githubUrl}</p>}
+          {errors.githubUrl && <p className="text-xs text-destructive mt-1.5">{errors.githubUrl}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">Deployed URL</label>
+          <label className="block text-sm font-semibold mb-2">Deployed URL</label>
           <input
             type="url"
             placeholder="https://..."
@@ -191,43 +191,47 @@ Core Features:
             onChange={(e) => setForm((f) => ({ ...f, deployedUrl: e.target.value }))}
             className={inputClass}
           />
-          {errors.deployedUrl && <p className="text-xs text-destructive mt-1">{errors.deployedUrl}</p>}
+          {errors.deployedUrl && <p className="text-xs text-destructive mt-1.5">{errors.deployedUrl}</p>}
         </div>
 
         <button
           onClick={handleSave}
-          className="w-full px-4 py-2 rounded-md bg-secondary text-secondary-foreground font-medium hover:bg-muted transition-colors"
+          className="w-full px-4 py-2.5 rounded-md bg-secondary text-secondary-foreground font-semibold hover:bg-muted"
         >
           Save Links
         </button>
       </div>
 
-      {/* Submission */}
-      <div className="premium-card text-center">
+      {/* Shipped Success Message */}
+      {
+        shipStatus === "Shipped" && (
+          <div className="premium-card mt-6 bg-green-50 border-green-200">
+            <p className="text-sm text-green-700 font-medium text-center">
+              Project 1 Shipped Successfully.
+            </p>
+          </div>
+        )
+      }
+
+      {/* Final Submission */}
+      <div className="premium-card text-center mt-6">
+        <h2 className="font-serif text-lg font-semibold mb-4">Final Submission</h2>
         <button
           onClick={copySubmission}
           disabled={!canShip}
-          className={`flex items-center gap-2 mx-auto px-6 py-2.5 rounded-md font-medium transition-opacity ${
-            canShip
-              ? "bg-primary text-primary-foreground hover:opacity-90"
-              : "bg-muted text-muted-foreground cursor-not-allowed"
-          }`}
+          className={`flex items-center gap-2 mx-auto px-6 py-2.5 rounded-md font-medium transition-opacity ${canShip
+            ? "bg-primary text-primary-foreground hover:opacity-90"
+            : "bg-muted text-muted-foreground cursor-not-allowed"
+            }`}
         >
           <Copy className="w-4 h-4" /> Copy Final Submission
         </button>
         {!canShip && (
-          <p className="text-xs text-muted-foreground mt-3">
-            {!allTestsPassed ? "Pass all 10 tests first. " : ""}
-            {!allLinksProvided ? "Provide all 3 links. " : ""}
-            {allLinksProvided && !allLinksValid ? "Fix invalid URLs. " : ""}
-          </p>
-        )}
-        {canShip && (
-          <p className="text-sm text-muted-foreground mt-4 font-serif italic">
-            Project 1 Shipped Successfully.
+          <p className="text-xs text-muted-foreground mt-4">
+            Complete all artifact links and pass all tests to enable submission.
           </p>
         )}
       </div>
-    </div>
+    </div >
   );
 }

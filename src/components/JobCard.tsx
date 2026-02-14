@@ -62,36 +62,36 @@ export default function JobCard({
 
       <p className="text-xs text-muted-foreground">{daysText}</p>
 
-      <div className="flex items-center gap-2 flex-wrap pt-1 border-t border-border">
+      <div className="flex items-center gap-2 flex-wrap pt-3 border-t border-border">
         <button
           onClick={onView}
-          className="flex items-center gap-1 text-xs px-3 py-1.5 rounded-md bg-secondary text-secondary-foreground hover:bg-muted transition-colors"
+          className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-md bg-secondary text-secondary-foreground hover:bg-muted"
         >
-          <Eye className="w-3 h-3" /> View
+          <Eye className="w-3.5 h-3.5" /> View
         </button>
         <button
           onClick={onSave}
-          className={`flex items-center gap-1 text-xs px-3 py-1.5 rounded-md transition-colors ${
+          className={`flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-md ${
             isSaved
-              ? "bg-primary text-primary-foreground"
+              ? "bg-primary text-primary-foreground hover:opacity-90"
               : "bg-secondary text-secondary-foreground hover:bg-muted"
           }`}
         >
-          <Bookmark className="w-3 h-3" /> {isSaved ? "Saved" : "Save"}
+          <Bookmark className="w-3.5 h-3.5" /> {isSaved ? "Saved" : "Save"}
         </button>
         <a
           href={job.applyUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-1 text-xs px-3 py-1.5 rounded-md bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
+          className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-md bg-primary text-primary-foreground hover:opacity-90"
         >
-          <ExternalLink className="w-3 h-3" /> Apply
+          <ExternalLink className="w-3.5 h-3.5" /> Apply
         </a>
 
         <select
           value={status}
           onChange={(e) => onStatusChange(e.target.value as JobStatus)}
-          className={`ml-auto text-xs px-2 py-1 rounded-md border border-border ${getStatusClass(status)}`}
+          className={`ml-auto text-xs px-2.5 py-1.5 rounded-md border border-border ${getStatusClass(status)}`}
         >
           {ALL_STATUSES.map((s) => (
             <option key={s} value={s}>{s}</option>
